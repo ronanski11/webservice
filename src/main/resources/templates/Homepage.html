@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="icon"
+      type="image/png"
+      th:href="@{/images/icons/grafitti_r.ico}"
+    />
+  </head>
+  <body
+    th:style="'background-image:url(' + @{/images/Bau_229_Webseite_Hintergrund.jpeg} + '); background-repeat: no-repeat; background-size: 115%; background-position-x: center;'"
+  >
+    <style>
+      #header {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        height: fit-content;
+        width: 100%;
+      }
+
+      #user_logo {
+        height: 50px;
+        width: 50px;
+      }
+
+      #username_display {
+        display: flex;
+        font-size: 50%;
+        color: #727272;
+        margin: 2%;
+      }
+
+      .username_box {
+        display: flex;
+        font-family: "Bahnschrift", sans-serif;
+        font-size: 300%;
+        letter-spacing: -0.2px;
+        word-spacing: -1px;
+        color: #f8f8f8;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        border-radius: 40em;
+        border-style: none;
+        box-sizing: border-box;
+        background-color: #0c0c7aa3;
+        height: fit-content;
+        width: fit-content;
+        align-items: center;
+        margin: 2%;
+      }
+
+      #RocheLogo {
+        position: absolute;
+        float: right;
+      }
+
+      #content_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+      }
+
+      .Welcome_box {
+        text-align: center;
+        margin-top: 3%;
+      }
+
+      #Welcome_message {
+        width: 70%;
+        margin-left: 15%;
+        font-family: "Bahnschrift", sans-serif;
+        font-size: 300%;
+        letter-spacing: -0.2px;
+        word-spacing: -1px;
+        color: #f8f8f8;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        border-radius: 40em;
+        border-style: none;
+        box-sizing: border-box;
+        background-color: #0c0c7aa3;
+      }
+
+      .Intro_box {
+        text-align: center;
+        height: 100%;
+        width: 40%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+      }
+
+      #Intro_text {
+        font-family: "Bahnschrift", sans-serif;
+        font-size: 120%;
+        letter-spacing: -0.2px;
+        word-spacing: -1px;
+        color: #f8f8f8;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        border-radius: 2em;
+        border-style: none;
+        box-sizing: border-box;
+        background-color: #0d0d77e0;
+      }
+
+      #Page_options_container {
+        height: 10%;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        letter-spacing: -0.2px;
+        word-spacing: -1px;
+        color: #f8f8f8;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        border-radius: 2em;
+        border-style: none;
+        box-sizing: border-box;
+        background-color: #0d0d77e0;
+      }
+
+      .Page_options {
+        z-index: +1;
+        text-align: center;
+        appearance: none;
+        background-color: #ffffff;
+        border-radius: 40em;
+        border-style: none;
+        box-shadow: #2e2eac93 0 -12px 6px inset;
+        box-sizing: border-box;
+        color: #000000;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system, sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -0.24px;
+        margin: 5%;
+        outline: none;
+        padding: 1rem 1.3rem;
+        quotes: auto;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+      .Page_options:hover {
+        background-color: #7d7dff;
+        box-shadow: #3b3b98 0 -6px 8px inset;
+        transform: scale(1.125);
+      }
+      #username_box:hover {
+        transform: scale(1.125);
+      }
+      .Page_options:active {
+        transform: scale(1.025);
+      }
+      #username_box:active {
+        transform: scale(1.025);
+      }
+      @media (min-width: 768px) {
+        .Page_options {
+          font-size: 1.5rem;
+          padding: 0.75rem 2rem;
+        }
+        @media (min-width: 768px) {
+          #username_box {
+            font-size: 1.5rem;
+            padding: 0.75rem 2rem;
+          }
+        }
+      }
+      /* unvisited link */
+      a:link {
+        text-decoration: none;
+        color: black;
+      }
+
+      /* visited link */
+      a:visited {
+        color: black;
+      }
+      .garageDoor {
+        z-index: 8;
+        position: fixed;
+        top: -1600px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .vanish {
+        animation-name: vanish;
+        animation-duration: 2s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        cursor: none;
+      }
+
+      @keyframes vanish {
+        100% {
+          top: 0px;
+        }
+      }
+      #username_link {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        height: fit-content;
+      }
+      #username_display_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #image_box {
+        display: flex;
+        margin: 2%;
+        margin-right: 10%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        height: fit-content;
+      }
+      #space_div {
+        width: 60px;
+      }
+    </style>
+    <a href="https://www.roche.ch" target="_blank">
+      <img
+        id="RocheLogo"
+        src="../static/images/Roche_logo.png"
+        width="120px"
+        height="62.4px"
+        th:src="@{images/Roche_logo.png}"
+        alt="Roche Webseite"
+      />
+    </a>
+    <div id="header">
+      <a th:href="@{'/users/' + ${currentUsr.username}}" id="username_link">
+        <div class="username_box">
+          <div id="image_box">
+            <img src="images/User_logo.png" id="user_logo" />
+          </div>
+          <div id="username_display_box">
+            <p
+              id="username_display"
+              type="text"
+              th:text="*{currentUsr.username}"
+            ></p>
+          </div>
+          <div id="space_div"></div>
+        </div>
+      </a>
+    </div>
+    <div id="content_container">
+      <div class="Welcome_box">
+        <h1 id="Welcome_message">
+          Wilkomme zur inoffizielle IT Websiite vom Bau 229
+        </h1>
+      </div>
+
+      <div class="Intro_box">
+        <p id="Intro_text">
+          <br />
+          Wilkomme zur IT Siite vom Bau 229 in Kaiseraugsht. <br />
+          Do lishte mir e paar Sache uf die wichtig sind, wenn me im Bau 229
+          schafft. <br />
+          Do findet me die Optione...
+          <br />
+          <br />
+        </p>
+      </div>
+      <div id="Page_options_container">
+        <div class="Page_options" id="Home_option">
+          <a href="to_be_finished.html">*To be finished*</a>
+        </div>
+        <div class="Page_options" id="Toeggele_option">
+          <a href="toeggele/regle">Töggele Regle</a>
+        </div>
+        <div class="Page_options" id="Contact_option">
+          <a href="to_be_finished.html">*To be finished*</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

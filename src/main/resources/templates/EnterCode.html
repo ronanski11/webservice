@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" th:href="@{/images/icons/grafitti_r.ico}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+	<style>
+	      .verification-input {
+        width: 40px;
+        height: 40px;
+        margin: 0 5px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 18px;
+        outline: none;
+      }
+      
+      .input-group {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+input[type="text"]:focus {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+#veri-error-message {
+    font-size: 100%;
+    color: red;
+    text-align: center;
+}
+
+#veri-error-message-div {
+    display: flex;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #ffbfc5;
+    border-radius: 5px;
+    padding: 1%;
+}
+      </style>
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('../../images/Basel_from_above.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="POST" >
+					<span class="login100-form-logo">
+						<img th:src="@{/images/Roche_logo_blue.png}" id ="roche_logo">
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Verify Email Address
+					</span>
+					
+					
+					<div class="input-group">
+        <input type="text" maxlength="1" class="verification-input" name="input-1" autofocus>
+        <input type="text" maxlength="1" class="verification-input" name="input-2">
+        <input type="text" maxlength="1" class="verification-input" name="input-3">
+        <input type="text" maxlength="1" class="verification-input" name="input-4">
+        <input type="text" maxlength="1" class="verification-input" name="input-5">
+        <input type="text" maxlength="1" class="verification-input" name="input-6">
+      </div>
+      
+      <div th:if="${Error == true}" id="veri-error-message-div">
+      	<p id="veri-error-message">Incorrect code. Please try again or request a new code.</p>
+      </div>
+      
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+							Enter
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+	<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/js/main.js}"></script>
+	
+	<script>
+      const inputs = document.querySelectorAll("input[type='text']");
+
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener("input", () => {
+          if (i < inputs.length - 1 && inputs[i].value) {
+            inputs[i + 1].focus();
+          }
+        });
+
+        inputs[i].addEventListener("keydown", (event) => {
+          if (event.key === "Backspace" && i > 0 && !inputs[i].value) {
+            inputs[i - 1].focus();
+          }
+        });
+      }
+      document.addEventListener("paste", (event) => {
+  const pastedData = event.clipboardData.getData("text");
+  if (pastedData.length === inputs.length) {
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].value = pastedData[i];
+      if (i < inputs.length - 1) {
+        inputs[i + 1].focus();
+      }
+    }
+    event.preventDefault();
+  }
+});
+      
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link
+      rel="icon"
+      type="image/png"
+      th:href="@{/images/icons/grafitti_r.ico}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/animate/animate.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/css-hamburgers/hamburgers.min.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/animsition/css/animsition.min.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/select2/select2.min.css}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/vendor/daterangepicker/daterangepicker.css}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <style>
+      .div-message-of-success {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #8282ff87;
+        border-radius: 24px;
+        margin: 5%;
+        margin-bottom: 15%;
+      }
+      .message-of-success {
+        font-size: 140%;
+        margin: 5%;
+        color: white;
+        text-align: center;
+      }
+    </style>
+    <!--===============================================================================================-->
+  </head>
+  <body>
+    <div class="limiter">
+      <div
+        class="container-login100"
+        th:unless="${type == 'verification'}"
+        style="background-image: url('../images/Roche_towers_left.jpg')"
+      >
+        <div class="wrap-login100">
+          <form class="login100-form validate-form">
+            <span class="login100-form-logo">
+              <img th:src="@{/images/Roche_logo_blue.png}" id="roche_logo" />
+            </span>
+
+            <div th:if="${type == 'login'}">
+              <span class="login100-form-title p-b-34 p-t-27"> Login </span>
+
+              <div class="div-message-of-success">
+                <p class="message-of-success">Successfuly logged in!</p>
+              </div>
+            </div>
+            <div th:if="${type == 'createAccount'}">
+              <span class="login100-form-title p-b-34 p-t-27">
+                Create Account
+              </span>
+
+              <div class="div-message-of-success">
+                <p class="message-of-success">Account successfully created!</p>
+              </div>
+            </div>
+            <div class="container-login100-form-btn">
+              <button class="login100-form-btn" id="homepageButton">
+                Homepage
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div
+        class="container-login100"
+        th:if="${type == 'verification'}"
+        style="background-image: url('../images/Basel_from_above.jpg')"
+      >
+        <div class="wrap-login100">
+          <form class="login100-form validate-form">
+            <span class="login100-form-logo">
+              <img th:src="@{/images/Roche_logo_blue.png}" id="roche_logo" />
+            </span>
+
+            <div th:if="${type == 'verification'}">
+              <span class="login100-form-title p-b-34 p-t-27">
+                Verify Email
+              </span>
+
+              <div class="div-message-of-success">
+                <p class="message-of-success">Email successfuly verified!</p>
+              </div>
+
+              <div class="container-login100-form-btn">
+                <button class="login100-form-btn" id="continueButton">
+                  Continue
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{/vendor/select2/select2.min.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+    <script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+    <!--===============================================================================================-->
+    <script th:src="@{/js/main.js}"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var homepageButton = document.getElementById("homepageButton");
+        homepageButton.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the form from submitting
+          window.location.href = "../Homepage";
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        var homepageButton = document.getElementById("continueButton");
+        homepageButton.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the form from submitting
+          window.location.href = "../Homepage";
+        });
+      });
+    </script>
+  </body>
+</html>

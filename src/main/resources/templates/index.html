@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Account Info</title>
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      name="viewport"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/account-settings/css/bootstrap_css.css}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/account-settings/css/style.css}"
+    />
+  </head>
+  <body>
+    <div>
+    <section class="py-5 my-5">
+      <div class="container">
+        <h1 class="mb-5">Account Settings</h1>
+        <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+          <div class="profile-tab-nav border-right">
+            <div class="p-4">
+              <div class="img-circle text-center mb-3">
+                <img
+                  th:src="@{/images/User_logo2.png}"
+                  alt="Image"
+                  id="profile_image"
+                  class="shadow"
+                />
+              </div>
+              <h4 class="text-center" th:text="*{currentUsr.username}"</h4>
+            </div>
+            <div
+              class="nav flex-column nav-pills"
+              id="v-pills-tab"
+              role="tablist"
+              aria-orientation="vertical"
+            >
+              <a
+                class="nav-link active"
+                id="account-tab"
+                data-toggle="pill"
+                href="#account"
+                role="tab"
+                aria-controls="account"
+                aria-selected="true"
+              >
+                <i class="fa fa-user text-center mr-1"></i>
+                Info
+              </a>
+              <a
+                class="nav-link"
+                id="password-tab"
+                data-toggle="pill"
+                href="#password"
+                role="tab"
+                aria-controls="password"
+                aria-selected="false"
+              ><i class="fa fa-lock text-center mr-1"></i>
+                Password
+              </a>
+                
+              <a
+                class="nav-link"
+                id="security-tab"
+                data-toggle="pill"
+                href="#security"
+                role="tab"
+                aria-controls="security"
+                aria-selected="false"
+              >
+                <i class="fa fa-envelope text-center mr-1"></i>
+                Email
+              </a>
+              <a
+                class="nav-link"
+                id="application-tab"
+                data-toggle="pill"
+                href="#application"
+                role="tab"
+                aria-controls="application"
+                aria-selected="false"
+              >
+                <i class="fa fa-bar-chart text-center mr-1"></i>
+                Statstics
+              </a>
+              <a
+                class="nav-link"
+                id="notification-tab"
+                data-toggle="pill"
+                href="#notification"
+                role="tab"
+                aria-controls="notification"
+                aria-selected="false"
+              >
+                <i class="fa fa-gear text-center mr-1"></i>
+                Manage Account
+              </a>
+            </div>
+          </div>
+          <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="account"
+              role="tabpanel"
+              aria-labelledby="account-tab"
+			  th:if="${setupFinished == false}"
+            >
+              <h3 class="mb-4">Account Info</h3>
+			  <div class="test123">
+                <p1 style="margin: 10%;">
+				Please finish setting up your Account. It is neccessary to access some features.
+			  </p1> <a th:href="@{'/users/' + ${currentUsr.username} + '/finishsetup'}">
+			  	<button class="btn btn-primary">Finish Setup</button>
+				</a>
+              </div>
+            </div>
+			            <div
+              class="tab-pane fade show active"
+              id="account"
+              role="tabpanel"
+              aria-labelledby="account-tab"
+			  th:if="${setupFinished == true}"
+            ><form method="POST" action="/updateUserInfo" th:object="${UserInfo}">
+              <h3 class="mb-4">Account Info</h3>
+              <div id="row_account">
+				
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input type="hidden" th:field="*{username}">
+                    <input type="text" class="form-control" th:field="*{firstname}" id="first_name" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" th:field="*{lastname}" id="last_name"/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      th:field="*{email}"
+                      id="email"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Phone number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      th:field="*{phoneNumber}"
+                      id="phone_number"
+                    />
+                  </div>
+                </div>
+                      <div th:if="${Errortype == 'userInfoError'}" id="veri-error-message-div">
+      	<p id="veri-error-message">Invalid user info. Please enter valid values.</p>
+      </div>
+				
+              </div>
+              <div>
+                <button class="btn btn-primary" type="submit">Update</button>
+                <button class="btn btn-light" type="button" id="cancel_account">Cancel</button>
+              </div>
+			</form>
+            </div>
+            
+            <div
+              class="tab-pane fade"
+              id="password"
+              role="tabpanel"
+              aria-labelledby="password-tab"
+            >
+            <form method="POST" action="/updatePassword">
+              <h3 class="mb-4">Password Settings</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Old password</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" name="oldPassword" id="oldPassword" />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('oldPassword', 'eye-1')">
+                          <i class="fa fa-eye-slash" id="eye-1"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>New Password</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" name="newPassword1" id="newPassword1" />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('newPassword1', 'eye-2')">
+                          <i class="fa fa-eye-slash" id="eye-2"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                   <label>Confirm New Password</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" name="newPassword2" id="newPassword2" />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('newPassword2', 'eye-3')">
+                          <i class="fa fa-eye-slash" id="eye-3"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div th:if="${Errortype == 'oldPasswordError'}" id="veri-error-message-div">
+      	        <p id="veri-error-message">Old password wasn't entered correctely. Please try again</p>
+             </div>
+              <div th:if="${Errortype == 'passwordMatchError'}" id="veri-error-message-div">
+      	        <p id="veri-error-message">New passwords don't match. Please try again</p>
+              </div> 
+              <div>
+                <button class="btn btn-primary" type="submit">Change password</button>
+                <button class="btn btn-light" id="passwordCancel" type="button">Cancel</button>
+              </div>
+            </form>
+            </div>
+            
+            <div
+              class="tab-pane fade"
+              id="security"
+              role="tabpanel"
+              aria-labelledby="security-tab"
+              th:if="${setupFinished == true}"
+            >
+              <h3 class="mb-4">Email Settings</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" >
+                    <label>Email</label>
+                    <input type="text" class="form-control" th:value="*{UserInfo.email}" readonly/>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a th:href="@{../../verify/account}">
+                <button class="btn btn-primary">Change Email</button>
+              </a>
+              </div>
+            </div>
+
+            <div
+              class="tab-pane fade"
+              id="security"
+              role="tabpanel"
+              aria-labelledby="security-tab"
+              th:if="${setupFinished == false}"
+            >
+              <h3 class="mb-4">Email Settings</h3>
+              			  <div class="test123">
+                <p1 style="margin: 10%;">
+				Please finish setting up your Account. It is neccessary to access some features.
+			  </p1> <a th:href="@{'/users/' + ${currentUsr.username} + '/finishsetup'}">
+			  	<button class="btn btn-primary">Finish Setup</button>
+				</a>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="application"
+              role="tabpanel"
+              aria-labelledby="application-tab"
+            >
+              <h3 class="mb-4">Application Settings</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="app-check"
+                      />
+                      <label class="form-check-label" for="app-check">
+                        App check
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="defaultCheck2"
+                      />
+                      <label class="form-check-label" for="defaultCheck2">
+                        Lorem ipsum dolor sit.
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-primary">Update</button>
+                <button class="btn btn-light">Cancel</button>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="notification"
+              role="tabpanel"
+              aria-labelledby="notification-tab"
+            >
+              <h3 class="mb-4">Manage Account</h3>
+            <div>
+			<div class="button">
+				<a th:href="@{'/users/' + ${currentUsr.username} + '/logout'}" class="user_options"><button class="btn btn-primary">Log out</button></a>
+			</div>
+	<div class="button">
+				<a th:href="@{'/users/' + ${currentUsr.username} + '/delete'}" class="user_options"><button class="btn btn-primary">Delete Account</button></a>
+			</div>
+            </div>
+              <div>
+                
+                <button class="btn btn-light">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+  // Store initial input values
+  document.addEventListener("DOMContentLoaded", function() {
+    const initialFirstName = document.getElementById("first_name").value;
+    const initialLastName = document.getElementById("last_name").value;
+    const initialEmail = document.getElementById("email").value;
+    const initialPhoneNumber = document.getElementById("phone_number").value;
+
+    // Reset input fields when the "Cancel" button is clicked
+    document.getElementById("cancel_account").addEventListener("click", function() {
+      document.getElementById("first_name").value = initialFirstName;
+      document.getElementById("last_name").value = initialLastName;
+      document.getElementById("email").value = initialEmail;
+      document.getElementById("phone_number").value = initialPhoneNumber;
+    });
+
+    document.getElementById("passwordCancel").addEventListener("click", function() {
+      document.getElementById("oldPassword").value = null;
+      document.getElementById("newPassword1").value = null;
+      document.getElementById("newPassword2").value = null;
+    });
+  });
+
+function togglePasswordVisibility(inputId, toggleIconId) {
+  const input = document.getElementById(inputId);
+  const toggleIcon = document.getElementById(toggleIconId);
+
+  if (input.type === "password") {
+    input.type = "text";
+    toggleIcon.classList.remove("fa-eye-slash");
+    toggleIcon.classList.add("fa-eye");
+  } else {
+    input.type = "password";
+    toggleIcon.classList.remove("fa-eye");
+    toggleIcon.classList.add("fa-eye-slash");
+  }
+}
+
+    </script>
+  </body>
+</html>

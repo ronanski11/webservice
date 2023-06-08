@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="icon" type="image/png" th:href="@{/images/icons/grafitti_r.ico}"/>
+        <h1 id="header">
+            Wilkommen zum Credentials-Webservice von Ronan
+        </h1>
+       
+    </head>
+    <body>
+    <div class="flex-container">
+    <h1 id="table_title">User</h1>
+    <div id="personListTableDiv">
+    <div id="logo_and_info">
+          <div class="username_box">
+      <div id="image_box">
+        <img src="../images/User_logo.png" id="user_logo">
+      </div>
+        <div id="username_display_box">
+        <p id="username_display" type="text" th:text="*{currentUsr.username}"></p>
+        </div>
+        <div id="space_div"></div>
+      </div>
+      <div id="user_info_div">
+      	
+<div th:if="${setupFinished == true}">
+<p id="header_text">User info:</p>
+  <table id="user_info_table">
+    <tbody>
+      <tr>
+        <th>Firstname: </th>
+        <th th:text="*{userInfo.firstname}"></th>
+      </tr>
+      <tr>
+        <th>Lastname: </th>
+        <th th:text="*{userInfo.lastname}"></th>
+      </tr>
+      <tr>
+        <th>Email: </th>
+        <th th:text="*{userInfo.email}"></th>
+      </tr>
+      <tr>
+        <th>Phone:</th>
+        <th th:text="*{userInfo.phoneNumber}"></th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  
+      </div>
+      
+     <div class="button">
+				<a th:href="@{'/users/' + ${currentUsr.username} + '/finishsetup'}" class="user_options"><span th:if="${setupFinished == true}">Edit user info</span><span th:if="${setupFinished == false}">Finish setting up account</span></a>
+			</div>
+			<div class="button">
+				<a th:href="@{'/users/' + ${currentUsr.username} + '/stats'}" class="user_options">View Stats</a>
+			</div>
+			<div class="button">
+				<a th:href="@{'/users/' + ${currentUsr.username} + '/changepassword'}" class="user_options">Change password</a>
+			</div>
+			<div class="button">
+				<a th:href="@{'/users/' + ${currentUsr.username} + '/logout'}" class="user_options">Log out</a>
+			</div>
+	<div class="button">
+				<a th:href="@{'/users/' + ${currentUsr.username} + '/delete'}" class="user_options">Delete account</a>
+			</div>
+      </div>
+			</div>
+			</div>
+        <style>
+            body{
+   				background-color: #6697e0;
+            }
+            #user_info_table {
+            	margin-bottom:10%;
+            }
+            .user_options {
+            	font-size: 80%;
+            }
+            #logo_and_info {
+            	display: flex;
+            	flex-direction: column;
+				align-items: center;
+				margin: 5%;
+            }
+            .flex-container {
+  				display: flex;
+ 				flex-direction: column;
+ 				align-items: center;
+			}
+			#form {
+				margin-top: 5%;
+				margin-bottom: 5%;
+				text-align: center;
+   				display: flex;
+    			flex-direction: column;
+    			justify-content: center;
+    			align-items: center;
+			}
+            #header {
+                font-family: 'Bahnschrift', sans-serif;
+                text-align: center;
+                font-size: 400%;
+            }
+            #personListTableDiv {
+            	box-shadow: 0 0 10px 5px black;
+            	margin-top: 0%;
+            	margin-left: 0%;
+            	height: inherit;
+  				width: 25%;
+  				display: flex;
+  				justify-content: center;
+  				align-items: center;
+  				letter-spacing: -0.2px;
+  				word-spacing: -1px;
+  				color: #f8f8f8;
+  				font-weight: 700;
+  				text-decoration: none solid rgb(68, 68, 68);
+ 				font-style: normal;
+  				font-variant: normal;
+  				text-transform: none;
+ 	 			border-radius: 1em;
+  				border-style: none;
+  				box-sizing: border-box;
+  				background-color: #0d0d77e0;
+            }
+            #personListTable {
+            	font-size:180%;
+            }
+            a:link {
+  			text-decoration: none;
+  			color: White;
+			}
+			th, td {
+                width:150px;
+                text-align:center;
+                border:1px solid black;
+                padding:5px
+             
+            }
+			#table_title {
+			font-family: 'Bahnschrift', sans-serif;
+			font-size: 300%;
+			}
+			/* visited link */
+			a:visited {
+  			color: White;
+			}
+			/* #table_body {
+			font-size: 2
+			} */
+			input[type=text] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=text]:focus {
+    border-color:#333;
+}
+
+			input[type=password] {
+    			padding:5px; 
+   				border:2px solid #ccc; 
+    			-webkit-border-radius: 5px;
+   				 border-radius: 5px;
+			}
+			
+			input[type=password]:focus {
+    			border-color:#333;
+			}
+			
+			
+			input[type=submit] {
+				margin-left:4%;
+  				z-index: +1;
+  				text-align: center;
+		    	appearance: none;
+    			background-color: #b1b1ffa3;
+    			border-radius: 40em;
+    			border-style: none;
+    			box-shadow: #4a4a88a3 0 -12px 6px inset;
+    			box-sizing: border-box;
+    			color: #FFFFFF;
+    			cursor: pointer;
+    			display: inline-block;
+    			font-family: -apple-system,sans-serif;
+    			font-size: 1.2rem;
+    			font-weight: 700;
+    			letter-spacing: -.24px;
+    			margin: 5%;
+    			outline: none;
+    			padding: 1rem 1.3rem;
+    			quotes: auto;
+    			text-align: center;
+    			text-decoration: none;
+    			transition: all .15s;
+    			user-select: none;
+    			-webkit-user-select: none;
+    			touch-action: manipulation;
+			}
+			input[type=submit]:hover {
+  				background-color: #7d7dff;
+  				box-shadow: #3b3b98 0 -6px 8px inset;
+  				transform: scale(1.125);
+			}
+			input[type=submit]:active {
+  				transform: scale(1.025);
+			}
+			@media (min-width: 768px) {
+		   		input[type=submit] {
+    				font-size: 1.5rem;
+    				padding: .75rem 2rem;
+  				}
+			}
+			#username_display_box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+#image_box {
+	display: flex;
+	margin: 2%;
+	margin-right: 10%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	height: fit-content;
+}
+#space_div {
+	width: 60px;
+}
+#user_logo {
+  height: 50px;
+  width: 50px;
+}
+
+#username_display {
+display: flex;
+  font-size: 50%;
+  color: #727272;
+  margin: 2%;
+}
+
+.username_box{
+display: flex;
+  font-family: 'Bahnschrift', sans-serif;
+  font-size: 300%;
+  letter-spacing: -0.2px;
+  word-spacing: -1px;
+  color: #f8f8f8;
+  font-weight: 700;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  border-radius: 40em;
+  border-style: none;
+  box-sizing: border-box;
+  background-color: #0c0c7aa3;
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
+  margin: 2%;
+}
+.button {
+  				z-index: +1;
+  				text-align: center;
+		    	appearance: none;
+    			background-color: #b1b1ffa3;
+    			border-radius: 40em;
+    			border-style: none;
+    			box-shadow: #b1b1ffa3 0 -12px 6px inset;
+    			box-sizing: border-box;
+    			color: #000000;
+    			cursor: pointer;
+    			display: inline-block;
+    			font-family: -apple-system,sans-serif;
+    			font-size: 1.2rem;
+    			font-weight: 700;
+    			letter-spacing: -.24px;
+    			margin: 5%;
+    			outline: none;
+    			padding: 1rem 1.3rem;
+    			quotes: auto;
+    			text-align: center;
+    			text-decoration: none;
+    			transition: all .15s;
+    			user-select: none;
+    			-webkit-user-select: none;
+    			touch-action: manipulation;
+			}
+			.button:hover {
+  				background-color: #7d7dff;
+  				box-shadow: #3b3b98 0 -6px 8px inset;
+  				transform: scale(1.125);
+			}
+			.button:active {
+  				transform: scale(1.025);
+			}
+			@media (min-width: 768px) {
+		   		.button {
+    				font-size: 1.5rem;
+    				padding: .75rem 2rem;
+  				}
+			}
+        </style>
+    </body>
+</html>
